@@ -24,6 +24,7 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- Widget imports
 local mykeyboardlayout = require("widgets.mykeyboardlayout")
+local mytextclock = require("widgets.mytextclock")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -124,9 +125,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibar
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
-
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),

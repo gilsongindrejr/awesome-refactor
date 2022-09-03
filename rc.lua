@@ -25,6 +25,7 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- Widget imports
 local mykeyboardlayout = require("widgets.mykeyboardlayout")
 local mytextclock = require("widgets.mytextclock")
+local systray = require("widgets.systray")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -227,7 +228,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
-            wibox.widget.systray(),
+            systray,
             mytextclock,
             s.mylayoutbox,
         },

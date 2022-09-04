@@ -26,6 +26,7 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 local mykeyboardlayout = require("widgets.mykeyboardlayout")
 local mytextclock = require("widgets.mytextclock")
 local systray = require("widgets.systray")
+local mypromptbox = require("widgets.mypromptbox")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -189,7 +190,7 @@ awful.screen.connect_for_each_screen(function(s)
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
+    s.mypromptbox = mypromptbox
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)

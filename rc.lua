@@ -38,6 +38,7 @@ local mypromptbox = require("widgets.mypromptbox")
 local mylauncher = require("widgets.mylauncher")
 local mytaglist = require("widgets.mytaglist")
 local mytasklist = require("widgets.mytasklist")
+local mylayoutbox = require("widgets.mylayoutbox")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -124,15 +125,10 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create a promptbox for each screen
     s.mypromptbox = mypromptbox
-    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(gears.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
-                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-    
+
+    -- Create a layoutbox widget
+    s.mylayoutbox = mylayoutbox(s)
+
     -- Create a taglist widget
     s.mytaglist = mytaglist(s)
 

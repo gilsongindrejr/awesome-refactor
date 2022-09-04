@@ -22,11 +22,17 @@ require("awful.hotkeys_popup.keys")
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
+-- Default apps
+terminal = "x-terminal-emulator"
+editor = os.getenv("EDITOR") or "editor"
+editor_cmd = terminal .. " -e " .. editor
+
 -- Widget imports
 local mykeyboardlayout = require("widgets.mykeyboardlayout")
 local mytextclock = require("widgets.mytextclock")
 local systray = require("widgets.systray")
 local mypromptbox = require("widgets.mypromptbox")
+local mylauncher = require("widgets.mylauncher")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -57,11 +63,6 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
--- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
-editor = os.getenv("EDITOR") or "editor"
-editor_cmd = terminal .. " -e " .. editor
-
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -91,37 +92,6 @@ awful.layout.layouts = {
 -- }}}
 
 -- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
-}
-
-local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
-local menu_terminal = { "open terminal", terminal }
-
-if has_fdo then
-    mymainmenu = freedesktop.menu.build({
-        before = { menu_awesome },
-        after =  { menu_terminal }
-    })
-else
-    mymainmenu = awful.menu({
-        items = {
-                  menu_awesome,
-                  { "Debian", debian.menu.Debian_menu.Debian },
-                  menu_terminal,
-                }
-    })
-end
-
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}

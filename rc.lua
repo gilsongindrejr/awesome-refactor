@@ -27,6 +27,9 @@ terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
+-- Load theme
+beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+
 -- Widget imports
 local mykeyboardlayout = require("widgets.mykeyboardlayout")
 local mytextclock = require("widgets.mytextclock")
@@ -60,9 +63,6 @@ end
 -- }}}
 
 -- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
